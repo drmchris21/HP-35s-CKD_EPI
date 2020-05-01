@@ -50,4 +50,13 @@ G049	RTN
 
 And the equation equivalent
 
-141*0,993^Age*((1+SCr/(Sex*-0,2+1,1)-abs(1-SCr/(Sex*-0,2+1,1)))/2)^(Sex*0,082-0,493)*((1+SCr/(Sex*-0,2+1,1)+abs(1-SCr/(Sex*-0,2+1,1)))/2)^-1,209*(Sex*0,018+0,982)*(Race*0,159+0,841)
+C: Serum Creatinine (mg/dL)
+A: Age
+S: Sex (1=male, 2=female)
+R: Race (1=non african american, 2=african american)
+
+141*0,993^A*((1+C/(S*-0,2+1,1)-abs(1-C/(S*-0,2+1,1)))/2)^(S*0,082-0,493)*((1+C/(S*-0,2+1,1)+abs(1-C/(S*-0,2+1,1)))/2)^-1,209*(S*0,018+0,982)*(R*0,159+0,841)
+
+The equation can be writen smaller and probably faster if we reuse the A register after consuming its computation:
+
+141*0,993^A*((1+(C/(S*-0,2+1,1)►A)-abs(1-A))/2)^(S*0,082-0,493)*((1+(C/(S*-0,2+1,1)►A)+abs(1-A))/2)^-1,209*(S*0,018+0,982)*(R*0,159+0,841)
